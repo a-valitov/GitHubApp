@@ -3,10 +3,8 @@ package com.avalitov.githubapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.avalitov.githubapp.model.RecyclerAdapter
@@ -24,6 +22,10 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var btnSearch : ImageView
     lateinit var etSearch : EditText
+    lateinit var rgTabs : RadioGroup
+    lateinit var llSearch : LinearLayout
+    lateinit var rvSearch: RecyclerView
+    lateinit var rvFavorites: RecyclerView
 
     var reposArrayList = arrayListOf<Repository>()
 
@@ -33,6 +35,10 @@ class MainActivity : AppCompatActivity() {
 
         btnSearch = findViewById(R.id.btn_search)
         etSearch = findViewById(R.id.et_search)
+        rgTabs = findViewById(R.id.rg_tabs)
+        llSearch = findViewById(R.id.ll_search)
+        rvSearch = findViewById(R.id.rv_search)
+        rvFavorites = findViewById(R.id.rv_favorites)
 
         btnSearch.setOnClickListener {
             val query = etSearch.text.toString()
@@ -41,6 +47,28 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        rgTabs.setOnCheckedChangeListener { _, checkedId ->
+            if(checkedId == R.id.rb_search){
+                makeVisibleSearch()
+            } else {
+                makeVisibleFavorites()
+            }
+        }
+
+    }
+
+    private fun makeVisibleFavorites() {
+        rvFavorites.visibility = View.VISIBLE
+
+        rvSearch.visibility = View.GONE
+        llSearch.visibility = View.GONE
+    }
+
+    private fun makeVisibleSearch() {
+        rvSearch.visibility = View.VISIBLE
+        llSearch.visibility = View.VISIBLE
+
+        rvFavorites.visibility = View.GONE
     }
 
     private fun getUsers() {
@@ -87,7 +115,7 @@ class MainActivity : AppCompatActivity() {
 
                 if (responseBody != null) {
                     reposArrayList = responseBody
-                    val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+                    val recyclerView: RecyclerView = findViewById(R.id.rv_search)
                     recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
                     recyclerView.adapter = RecyclerAdapter(reposArrayList)
                 } else {

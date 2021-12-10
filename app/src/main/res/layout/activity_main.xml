@@ -6,17 +6,57 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <RadioGroup
+        android:id="@+id/rg_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="10dp"
+        android:background="@drawable/radio_group_tab_background"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/rb_search"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:background="@drawable/units_tab_selector"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:text="SEARCH"
+            android:textColor="@drawable/units_tab_text_color_selector"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/rb_favorites"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:background="@drawable/units_tab_selector"
+            android:checked="false"
+            android:text="FAVORITES"
+            android:gravity="center"
+            android:textColor="@drawable/units_tab_text_color_selector"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:button="@null"
+            />
+
+    </RadioGroup>
+
 
     <LinearLayout
-        android:id="@+id/fl_search"
+        android:id="@+id/ll_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintBottom_toTopOf="@+id/rv_search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/rg_tabs">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_search"
@@ -48,7 +88,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/rv_search"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="@dimen/margin_standard"
@@ -56,7 +96,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fl_search" />
+        app:layout_constraintTop_toBottomOf="@id/ll_search" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:visibility="gone"
+        android:id="@+id/rv_favorites"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/margin_standard"
+        tools:listitem="@layout/recyclerview_item"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_search" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
