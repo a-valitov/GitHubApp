@@ -5,6 +5,7 @@ import com.avalitov.githubapp.responses.SearchRepoResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.Query
 
 interface ApiInterface {
 
@@ -13,8 +14,10 @@ interface ApiInterface {
     @GET("users")
     fun getUsers() : Call<List<User>>
 
-    @GET("search/repositories?q=SevenMinuteWorkout")
+    @GET("search/repositories")
     //@Headers("Authorization: token TOKEN_HERE")
-    fun getRepositories() : Call<SearchRepoResponse>
+    fun getRepositories(
+        @Query("q") query: String
+    ) : Call<SearchRepoResponse>
 
 }
