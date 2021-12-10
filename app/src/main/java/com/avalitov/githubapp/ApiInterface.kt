@@ -15,6 +15,7 @@ interface ApiInterface {
     fun getUsers() : Call<List<User>>
 
     @GET("search/repositories")
+    //TODO: Put token safely (to Secrets.kt or something)
     //@Headers("Authorization: token TOKEN_HERE")
     fun getRepositories(
         @Query("q") query: String

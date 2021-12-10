@@ -16,11 +16,13 @@ class RecyclerAdapter(private val repos: ArrayList<Repository>)
         var mainLayout : LinearLayout = itemView.findViewById(R.id.ll_repos)
         var expandableLayout : LinearLayout = itemView.findViewById(R.id.ll_expandable)
         var nameTextView: TextView = itemView.findViewById(R.id.tv_name)
-        var descriptionTextView: TextView? = null
+        var descriptionTextView : TextView = itemView.findViewById(R.id.tv_description)
+        var ownerTextView : TextView = itemView.findViewById(R.id.tv_owner)
+        var forksTextView : TextView = itemView.findViewById(R.id.tv_forks_count)
+        var starsTextView : TextView = itemView.findViewById(R.id.tv_stars_count)
+        var createdAtTextView : TextView = itemView.findViewById(R.id.tv_created_at)
 
-        init {
-            descriptionTextView = itemView.findViewById(R.id.tv_description)
-            }
+        //init {}
 
     }
 
@@ -33,7 +35,11 @@ class RecyclerAdapter(private val repos: ArrayList<Repository>)
 
     override fun onBindViewHolder(holder: RepoViewHolder, position: Int) {
         holder.nameTextView?.text = repos[position].name
-        holder.descriptionTextView?.text = repos[position].owner.login
+        holder.ownerTextView?.text = "Author: ${repos[position].owner.login}"
+        holder.descriptionTextView?.text = repos[position].description
+        holder.forksTextView?.text = repos[position].forks_count.toString()
+        holder.starsTextView?.text = repos[position].stargazers_count.toString()
+        holder.createdAtTextView?.text = repos[position].created_at
 
         val isExpanded : Boolean = repos[position].expanded
         holder.expandableLayout.visibility = if (isExpanded) View.VISIBLE else View.GONE
