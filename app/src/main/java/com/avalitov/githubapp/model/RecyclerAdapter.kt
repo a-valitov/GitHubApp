@@ -3,10 +3,20 @@ package com.avalitov.githubapp.model
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.avalitov.githubapp.R
+import com.bumptech.glide.Glide
+import com.bumptech.glide.annotation.GlideModule
+import com.bumptech.glide.module.AppGlideModule
+
+// new since Glide v4
+@GlideModule
+class MyAppGlideModule : AppGlideModule() {
+    // leave empty for now
+}
 
 class RecyclerAdapter(private val repos: ArrayList<Repository>)
     : RecyclerView.Adapter<RecyclerAdapter.RepoViewHolder>() {
@@ -21,6 +31,7 @@ class RecyclerAdapter(private val repos: ArrayList<Repository>)
         var forksTextView : TextView = itemView.findViewById(R.id.tv_forks_count)
         var starsTextView : TextView = itemView.findViewById(R.id.tv_stars_count)
         var createdAtTextView : TextView = itemView.findViewById(R.id.tv_created_at)
+        var avatarImageView : ImageView = itemView.findViewById(R.id.iv_avatar)
 
         //init {}
 
@@ -40,6 +51,11 @@ class RecyclerAdapter(private val repos: ArrayList<Repository>)
         holder.forksTextView?.text = repos[position].forks_count.toString()
         holder.starsTextView?.text = repos[position].stargazers_count.toString()
         holder.createdAtTextView?.text = repos[position].created_at
+
+        Glide.with(holder.avatarImageView)
+                .load(repos[position].owner.avatar_url)
+                .centerCrop()
+                .into(holder.avatarImageView);
 
         val isExpanded : Boolean = repos[position].expanded
         holder.expandableLayout.visibility = if (isExpanded) View.VISIBLE else View.GONE
