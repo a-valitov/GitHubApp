@@ -47,13 +47,15 @@ class RecyclerAdapter(private val repos: ArrayList<Repository>)
     override fun onBindViewHolder(holder: RepoViewHolder, position: Int) {
         holder.nameTextView?.text = repos[position].name
         holder.ownerTextView?.text = "Author: ${repos[position].owner.login}"
-        holder.descriptionTextView?.text = repos[position].description
-        holder.forksTextView?.text = repos[position].forks_count.toString()
-        holder.starsTextView?.text = repos[position].stargazers_count.toString()
-        holder.createdAtTextView?.text = repos[position].created_at
+        holder.descriptionTextView?.text = "Description: ${repos[position].description}"
+        holder.forksTextView?.text = "Forks: ${repos[position].forks_count}"
+        holder.starsTextView?.text = "Stars: ${repos[position].stargazers_count}"
+        holder.createdAtTextView?.text = "Created at: ${repos[position].created_at}"
 
         Glide.with(holder.avatarImageView)
                 .load(repos[position].owner.avatar_url)
+                .placeholder(R.drawable.ic_user)
+                .error(R.drawable.ic_user)
                 .centerCrop()
                 .into(holder.avatarImageView);
 
