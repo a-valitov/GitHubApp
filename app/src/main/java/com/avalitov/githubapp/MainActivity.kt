@@ -22,7 +22,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var tvText : TextView
     lateinit var btnSearch : ImageView
     lateinit var etSearch : EditText
 
@@ -32,7 +31,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        tvText = findViewById(R.id.tv_text)
         btnSearch = findViewById(R.id.btn_search)
         etSearch = findViewById(R.id.et_search)
 
@@ -64,7 +62,7 @@ class MainActivity : AppCompatActivity() {
                         userStringBuilder.append("\n")
                     }
 
-                    tvText.text = userStringBuilder
+                    //tvText.text = userStringBuilder
                 }
             }
 
