@@ -29,13 +29,30 @@
             />
 
         <TextView
-            android:id="@+id/tv_description"
+            android:id="@+id/tv_owner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="description"
+            android:text="owner"
             />
+
+        <LinearLayout
+            android:id="@+id/ll_expandable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="description"
+                />
+
+        </LinearLayout>
 
     </LinearLayout>
 
